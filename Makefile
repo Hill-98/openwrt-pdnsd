@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pdnsd
-PKG_VERSION:=1.2.9a
+PKG_VERSION:=1.2.9a-par
 PKG_RELEASE:=3
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/wongsyrone/pdnsd.git
-PKG_SOURCE_VERSION:=ad22e203b810ae144aef734e335587d1c4b5f83d
+PKG_SOURCE_URL:=https://github.com/shadowsocksrr/pdnsd.git
+PKG_SOURCE_VERSION:=a8e46ccba7b0fa2230d6c42ab6dcd92926f6c21d
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION)
 PKG_SOURCE:=$(PKG_SOURCE_SUBDIR).tar.gz
 
@@ -39,11 +39,7 @@ define Package/$(PKG_NAME)/description
   minute-long hangs (or even crashes) that result from stalled dns queries.
 endef
 
-CONFIGURE_ARGS += \
-	--with-cachedir=/var/pdnsd \
-	--with-query-method=tcpudp \
-	--enable-ipv6 \
-	--with-tcp-max-query=3
+CONFIGURE_ARGS += --enable-ipv6 --enable-ipv6-startup --enable-tcp-subseq --with-cachedir=/var/pdnsd --with-query-method=tcpudp
 
 TARGET_CFLAGS += -ffunction-sections -fdata-sections
 TARGET_LDFLAGS += -Wl,--gc-sections
