@@ -1,0 +1,21 @@
+#!/bin/sh /etc/rc.common
+
+START=95
+
+USE_PROCD=1
+
+TEMP_PATH=/var/pdnsd
+
+start_service() {
+    mkdir -p $TEMP_PATH
+    touch $TEMP_PATH/pdnsd.cache
+    procd_open_instance
+	procd_set_param command /usr/sbin/pdnsd
+	procd_set_param respawn
+    procd_set_param pidfile /var/run/pdnsd.pid
+	procd_close_instance
+}
+
+stop_service() {
+    rm -rf $TEMP_PATH
+}

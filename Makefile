@@ -49,13 +49,13 @@ TARGET_CFLAGS += -flto
 TARGET_LDFLAGS += -Wl,-flto
 
 define Package/$(PKG_NAME)/install
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/pdnsd $(1)/usr/sbin/
 	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/pdnsd $(1)/usr/bin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/pdnsd-ctl/pdnsd-ctl $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/etc
+	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_CONF) ./files/pdnsd.conf $(1)/etc/pdnsd.conf
-	# $(INSTALL_CONF) $(PKG_BUILD_DIR)/doc/pdnsd.conf $(1)/etc/)
+	$(INSTALL_CONF) ./files/pdnsd.init $(1)/etc/init.d/pdnsd
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
