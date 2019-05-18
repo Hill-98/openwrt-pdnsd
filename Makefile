@@ -55,7 +55,7 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/etc
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_CONF) ./files/pdnsd.conf $(1)/etc/pdnsd.conf
-	$(INSTALL_CONF) ./files/pdnsd.init $(1)/etc/init.d/pdnsd
+	$(INSTALL_BIN) ./files/pdnsd.init $(1)/etc/init.d/pdnsd
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
